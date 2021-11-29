@@ -151,7 +151,7 @@
   width: 226px;
 }
 
-.list-item__element_delete_image{
+.list-item__element_delete_image {
   height: 2em;
   transform: rotateZ(45deg);
   transition: transform 200ms ease-in;
