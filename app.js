@@ -18,6 +18,7 @@ var completedTasksHolder=document.getElementById("completed-tasks");//completed-
 var createNewTaskElement=function(taskString){
 
     var listItem=document.createElement("li");
+    listItem.classList.add("list-item")
 
     //input (checkbox)
     var checkBox=document.createElement("input");//checkbx
@@ -25,26 +26,46 @@ var createNewTaskElement=function(taskString){
     var label=document.createElement("label");//label
     //input (text)
     var editInput=document.createElement("input");//text
-    //button.edit
+    //list-item__element_button_edit
     var editButton=document.createElement("button");//edit button
-
-    //button.delete
+    //list-item__element_button_delete
     var deleteButton=document.createElement("button");//delete button
     var deleteButtonImg=document.createElement("img");//delete button image
 
+
     label.innerText=taskString;
-    label.className='task';
+    label.classList.add("list-item__element");
+    label.classList.add("list-item__element_label");
+    label.classList.add("list-item__element_task");
+
+    // label.className="list-item__element_task";
 
     //Each elements, needs appending
     checkBox.type="checkbox";
+    checkBox.classList.add("list-item__element");
+    checkBox.classList.add("list-item__element_input");
+    checkBox.classList.add("list-item__element_checkbox");
+
     editInput.type="text";
-    editInput.className="task";
+    editInput.classList.add("list-item__element");
+    editInput.classList.add("list-item__element_input");
+    editInput.classList.add("list-item__element_text-input");
+    editInput.classList.add("list-item__element_task");
+    // editInput.className="list-item__element_task";
 
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="edit";
+    editButton.classList.add("list-item__element");
+    editButton.classList.add("list-item__element_button");
+    editButton.classList.add("list-item__element_button_edit");
+    // editButton.className="list-item__element_button_edit";
 
-    deleteButton.className="delete";
-    deleteButtonImg.src='./remove.svg';
+    // deleteButton.className="delete";
+    deleteButton.classList.add("list-item__element");
+    deleteButton.classList.add("list-item__element_button_delete");
+    deleteButton.classList.add("list-item__element_button");
+    deleteButtonImg.src="./remove.svg";
+    deleteButtonImg.classList.add("list-item__element_delete_image");
+    deleteButtonImg.setAttribute("alt", "remove task");
     deleteButton.appendChild(deleteButtonImg);
 
 
@@ -82,10 +103,10 @@ var editTask=function(){
 
     var listItem=this.parentNode;
 
-    var editInput=listItem.querySelector('input[type=text]');
+    var editInput=listItem.querySelector(".list-item__element_text-input");
     var label=listItem.querySelector("label");
-    var editBtn=listItem.querySelector(".edit");
-    var containsClass=listItem.classList.contains("editMode");
+    var editBtn=listItem.querySelector(".list-item__element_button_edit");
+    var containsClass=listItem.classList.contains("list-item_edit-mode");
     //If class of the parent is .editmode
     if(containsClass){
 
@@ -99,7 +120,7 @@ var editTask=function(){
     }
 
     //toggle .editmode on the parent.
-    listItem.classList.toggle("editMode");
+    listItem.classList.toggle("list-item_edit-mode");
 };
 
 
@@ -155,9 +176,9 @@ addButton.addEventListener("click",ajaxRequest);
 var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
     console.log("bind list item events");
 //select ListItems children
-    var checkBox=taskListItem.querySelector("input[type=checkbox]");
-    var editButton=taskListItem.querySelector("button.edit");
-    var deleteButton=taskListItem.querySelector("button.delete");
+    var checkBox=taskListItem.querySelector(".list-item__element_checkbox");
+    var editButton=taskListItem.querySelector(".list-item__element_button_edit");
+    var deleteButton=taskListItem.querySelector(".list-item__element_button_delete");
 
 
     //Bind editTask to edit button.
